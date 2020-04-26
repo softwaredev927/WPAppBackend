@@ -76,19 +76,13 @@ if( !class_exists( 'WCRestPayment' ) ) {
 
 					$order = wc_get_order( $order_id );
 
-					// set order to completed
-					if( $order->get_status() == 'processing' ) {
-							$order->update_status( 'completed' );
-					}
-
 				} else {
-					return new WP_REST_Response( array("c"), 123 );
 					$response['code']    = 401;
 					$response['message'] = __( "Please enter valid card details", "wc-rest-payment" );
 				}
 			}  else {
 				$response['code'] = 405;
-				$response['message'] = __( "Please select an available payment method. Supported payment method can be found at https://wordpress.org/plugins/wc-rest-payment/#description", "wc-rest-payment" );
+				$response['message'] = __( "Please select an available payment method.", "wc-rest-payment" );
 			}
 
 			return new WP_REST_Response( $response, 123 );
